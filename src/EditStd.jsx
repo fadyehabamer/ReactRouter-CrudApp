@@ -18,7 +18,7 @@ export default class EditStd extends React.Component {
       salary: this.state.salary,
     };
     this.props.onSave(editedStd);
-    this.props.history.push("/List");
+    this.props.navigate("/List");
   };
   render() {
     return (

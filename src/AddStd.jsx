@@ -9,7 +9,7 @@ export default class AddStd extends React.Component {
   };
 
   SavingAdd = () => {
-    this.props.history.push("/List");
+    this.props.navigate("/List");
   };
   CustomAdd = () => {
     let newStd = {
@@ -20,7 +20,7 @@ export default class AddStd extends React.Component {
       salary: this.state.salary
     };
     this.props.onAdd(newStd);
-    this.props.history.push("/List");
+    this.props.navigate("/List");
   };
   render() {
     return (
