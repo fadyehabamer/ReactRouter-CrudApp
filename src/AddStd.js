@@ -20,7 +20,7 @@ export default class AddStd extends React.Component {
       Address: this.state.Address,
       salary: this.state.salary
     };
-    this.props.location.AddnewStudentRerefence(newStd);
+    this.props.onAdd(newStd);
     this.props.history.push("/List");
   };
   render() {

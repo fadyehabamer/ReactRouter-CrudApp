@@ -2,11 +2,11 @@ import React from "react";
 import "./App.css"
 export default class EditStd extends React.Component {
   state = {
-    Id: this.props.location.CurrentObject.id,
-    Name: this.props.location.CurrentObject.Name,
-    Age: this.props.location.CurrentObject.Age,
-    Address: this.props.location.CurrentObject.Address,
-    salary: this.props.location.CurrentObject.salary,
+    Id: this.props.student.id,
+    Name: this.props.student.Name,
+    Age: this.props.student.Age,
+    Address: this.props.student.Address,
+    salary: this.props.student.salary,
   };
 
   SavingEdit = () => {
@@ -17,7 +17,7 @@ export default class EditStd extends React.Component {
       Address: this.state.Address,
       salary: this.state.salary,
     };
-    this.props.location.SavingEditRef(editedStd, this.props.location.index);
+    this.props.onSave(editedStd);
     this.props.history.push("/List");
   };
   render() {

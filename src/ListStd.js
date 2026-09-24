@@ -7,36 +7,14 @@ export default class ListStd extends React.Component {
     StudentsList: this.props.Students,
   };
 
-
-  AddnewStudent = (newObject) => {
-    this.state.StudentsList.push(newObject);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
-  SaveDelete = (_postion) => {
-    this.state.StudentsList.splice(_postion, 1);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
-  SavingEdit = (newEditObject, idx) => {
-    this.state.StudentsList.splice(idx, 1, newEditObject);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
+  componentDidUpdate(prevProps) {
+    if (prevProps.Students !== this.props.Students) {
+      this.setState({ StudentsList: this.props.Students });
+    }
+  }
 
   SortBySalary = () => {
-    let newList = this.state.StudentsList.sort((a, b) => {
-      return b.salary - a.salary;
-    });
-    this.setState({
-      StudentsList: newList,
-    });
+    this.props.onSort();
   };
 
   FilterSalaryAbove = () => {
@@ -56,10 +34,7 @@ export default class ListStd extends React.Component {
         <div className="features">
           <Link
             className="add"
-            to={{
-              pathname: "/AddStudent",
-              AddnewStudentRerefence: this.AddnewStudent,
-            }}
+            to="/AddStudent"
           >
             Add newStudent
           </Link>
@@ -104,16 +79,11 @@ export default class ListStd extends React.Component {
                   <input className="delete"
                     type="button"
                     value="delete"
-                    onClick={() => this.SaveDelete(index)}
+                    onClick={() => this.props.onDelete(index)}
                   />
                   <Link
                     className="edit"
-                    to={{
-                      pathname: "/EditStudent",
-                      SavingEditRef: this.SavingEdit,
-                      CurrentObject: std,
-                      index,
-                    }}
+                    to={`/EditStudent/${index}`}
                   >
                     Edit
                   </Link>
