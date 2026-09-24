@@ -3,25 +3,19 @@ import { Link } from "react-router-dom";
 import "./App.css"
 export default class ListStd extends React.Component {
 
+  // the filter is a view toggle; the full list stays in App
   state = {
-    StudentsList: this.props.Students,
+    onlyAbove2500: false,
   };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.Students !== this.props.Students) {
-      this.setState({ StudentsList: this.props.Students });
-    }
-  }
 
   SortBySalary = () => {
     this.props.onSort();
   };
 
   FilterSalaryAbove = () => {
-    let newList = this.state.StudentsList.filter((std) => std.salary > 2500);
-    this.setState({
-      StudentsList: newList,
-    });
+    this.setState((prev) => ({
+      onlyAbove2500: !prev.onlyAbove2500,
+    }));
   };
 
 
@@ -50,7 +44,7 @@ export default class ListStd extends React.Component {
 
           <input
             type="button"
-            value="Filter above 2500"
+            value={this.state.onlyAbove2500 ? "Show all" : "Filter above 2500"}
             onClick={() => this.FilterSalaryAbove()}
           />
         </div>
@@ -58,7 +52,9 @@ export default class ListStd extends React.Component {
         <br />
 
         <ul>
-          {this.state.StudentsList.map((std, index) => {
+          {this.props.Students.map((std, index) => {
+            // keep the real index so delete/edit target the right employee
+            if (this.state.onlyAbove2500 && !(std.salary > 2500)) return null;
             return (
               <li key={index}>
                 <span>
