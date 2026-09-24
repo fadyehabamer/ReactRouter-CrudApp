@@ -32,7 +32,7 @@ export default class AddStd extends React.Component {
           </h1>
         </center>
         <input
-          placeholder="ID"
+          placeholder="ID" aria-label="ID"
           type="text"
           value={this.state.Id}
           onChange={(e) =>
@@ -44,7 +44,7 @@ export default class AddStd extends React.Component {
 
         <br />
         <input
-          placeholder="Name"
+          placeholder="Name" aria-label="Name"
           value={this.state.Name}
           type="text"
           onChange={(e) =>
@@ -56,7 +56,7 @@ export default class AddStd extends React.Component {
 
         <br />
         <input
-          placeholder="Age"
+          placeholder="Age" aria-label="Age"
           type="text"
           value={this.state.Age}
           onChange={(e) =>
@@ -68,7 +68,7 @@ export default class AddStd extends React.Component {
 
         <br />
         <input
-          placeholder="Address"
+          placeholder="Address" aria-label="Address"
           type="text"
           value={this.state.Address}
           onChange={(e) =>
@@ -81,7 +81,7 @@ export default class AddStd extends React.Component {
         <br />
 
         <input
-          placeholder="Salary"
+          placeholder="Salary" aria-label="Salary"
           type="text"
           value={this.state.salary}
           onChange={(e) =>
