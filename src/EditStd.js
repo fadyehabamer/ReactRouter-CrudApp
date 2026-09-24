@@ -2,10 +2,11 @@ import React from "react";
 import "./App.css"
 export default class EditStd extends React.Component {
   state = {
-    Id: this.props.location.CurrentObject.id,
-    Name: this.props.location.CurrentObject.Name,
-    Age: this.props.location.CurrentObject.Age,
-    Address: this.props.location.CurrentObject.Address,
+    Id: this.props.student.id,
+    Name: this.props.student.Name,
+    Age: this.props.student.Age,
+    Address: this.props.student.Address,
+    salary: this.props.student.salary,
   };
 
   SavingEdit = () => {
@@ -14,8 +15,9 @@ export default class EditStd extends React.Component {
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
+      salary: this.state.salary,
     };
-    this.props.location.SavingEditRef(editedStd, this.props.location.index);
+    this.props.onSave(editedStd);
     this.props.history.push("/List");
   };
   render() {
@@ -26,7 +28,7 @@ export default class EditStd extends React.Component {
         </h1>
         <div className="form">
           <input
-            placeholder="ID"
+            placeholder="ID" aria-label="ID"
             type="text"
             value={this.state.Id}
             onChange={(e) =>
@@ -38,7 +40,7 @@ export default class EditStd extends React.Component {
 
           <br />
           <input
-            placeholder="Name"
+            placeholder="Name" aria-label="Name"
 
             value={this.state.Name}
             type="text"
@@ -51,7 +53,7 @@ export default class EditStd extends React.Component {
 
           <br />
           <input
-            placeholder="Age"
+            placeholder="Age" aria-label="Age"
 
             type="text"
             value={this.state.Age}
@@ -63,7 +65,7 @@ export default class EditStd extends React.Component {
           />
           <br />
           <input
-            placeholder="Address"
+            placeholder="Address" aria-label="Address"
             type="text"
             value={this.state.Address}
             onChange={(e) =>
@@ -74,7 +76,7 @@ export default class EditStd extends React.Component {
           />
           <br />
           <input
-            placeholder="Salary"
+            placeholder="Salary" aria-label="Salary"
             type="text"
             value={this.state.salary}
             onChange={(e) =>

@@ -3,47 +3,19 @@ import { Link } from "react-router-dom";
 import "./App.css"
 export default class ListStd extends React.Component {
 
+  // the filter is a view toggle; the full list stays in App
   state = {
-    StudentsList: this.props.Students,
+    onlyAbove2500: false,
   };
-
-
-  AddnewStudent = (newObject) => {
-    this.state.StudentsList.push(newObject);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
-  SaveDelete = (_postion) => {
-    this.state.StudentsList.splice(_postion, 1);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
-  SavingEdit = (newEditObject, idx) => {
-    this.state.StudentsList.splice(idx, 1, newEditObject);
-    this.setState({
-      StudentsList: this.state.StudentsList,
-    });
-  };
-
 
   SortBySalary = () => {
-    let newList = this.state.StudentsList.sort((a, b) => {
-      return b.salary - a.salary;
-    });
-    this.setState({
-      StudentsList: newList,
-    });
+    this.props.onSort();
   };
 
   FilterSalaryAbove = () => {
-    let newList = this.state.StudentsList.filter((std) => std.salary > 2500);
-    this.setState({
-      StudentsList: newList,
-    });
+    this.setState((prev) => ({
+      onlyAbove2500: !prev.onlyAbove2500,
+    }));
   };
 
 
@@ -56,10 +28,7 @@ export default class ListStd extends React.Component {
         <div className="features">
           <Link
             className="add"
-            to={{
-              pathname: "/AddStudent",
-              AddnewStudentRerefence: this.AddnewStudent,
-            }}
+            to="/AddStudent"
           >
             Add newStudent
           </Link>
@@ -75,7 +44,7 @@ export default class ListStd extends React.Component {
 
           <input
             type="button"
-            value="Filter above 2500"
+            value={this.state.onlyAbove2500 ? "Show all" : "Filter above 2500"}
             onClick={() => this.FilterSalaryAbove()}
           />
         </div>
@@ -83,7 +52,9 @@ export default class ListStd extends React.Component {
         <br />
 
         <ul>
-          {this.state.StudentsList.map((std, index) => {
+          {this.props.Students.map((std, index) => {
+            // keep the real index so delete/edit target the right employee
+            if (this.state.onlyAbove2500 && !(std.salary > 2500)) return null;
             return (
               <li key={index}>
                 <span>
@@ -104,16 +75,11 @@ export default class ListStd extends React.Component {
                   <input className="delete"
                     type="button"
                     value="delete"
-                    onClick={() => this.SaveDelete(index)}
+                    onClick={() => this.props.onDelete(index)}
                   />
                   <Link
                     className="edit"
-                    to={{
-                      pathname: "/EditStudent",
-                      SavingEditRef: this.SavingEdit,
-                      CurrentObject: std,
-                      index,
-                    }}
+                    to={`/EditStudent/${index}`}
                   >
                     Edit
                   </Link>
