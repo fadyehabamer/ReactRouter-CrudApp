@@ -36,7 +36,7 @@ export default class AppRouter extends React.Component {
   SortBySalary = () => {
     this.setState((prev) => ({
       StudentList: [...prev.StudentList].sort((a, b) => {
-        return b.salary - a.salary;
+        return a.salary - b.salary;
       }),
     }));
   };
