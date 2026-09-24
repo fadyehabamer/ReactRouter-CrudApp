@@ -9,7 +9,6 @@ export default class AddStd extends React.Component {
   };
 
   SavingAdd = () => {
-    alert("Backing");
     this.props.history.push("/List");
   };
   CustomAdd = () => {
