@@ -6,6 +6,7 @@ export default class EditStd extends React.Component {
     Name: this.props.location.CurrentObject.Name,
     Age: this.props.location.CurrentObject.Age,
     Address: this.props.location.CurrentObject.Address,
+    salary: this.props.location.CurrentObject.salary,
   };
 
   SavingEdit = () => {
@@ -14,6 +15,7 @@ export default class EditStd extends React.Component {
       Name: this.state.Name,
       Age: this.state.Age,
       Address: this.state.Address,
+      salary: this.state.salary,
     };
     this.props.location.SavingEditRef(editedStd, this.props.location.index);
     this.props.history.push("/List");
