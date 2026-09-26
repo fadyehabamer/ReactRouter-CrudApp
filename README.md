@@ -1,4 +1,7 @@
 # Crud React outer
+
+[![CI](https://github.com/fadyehabamer/ReactRouter-CrudApp/actions/workflows/ci.yml/badge.svg)](https://github.com/fadyehabamer/ReactRouter-CrudApp/actions/workflows/ci.yml)
+
 > Crud operations using React-Router
 
 ### Features
